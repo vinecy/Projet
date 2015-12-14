@@ -8,6 +8,8 @@
 // Ligne: i
 // colonne: j
 // Niveaux: k
+// niveau[i][j][k]
+// La base est le niveau k et le dernier niveau (1 boule) est le niveau 0
 
 int main (void){
   
