@@ -82,9 +82,19 @@ int main (void){
         }
         printf("\n");
     }
+
     
-    //Creation de la base:
+        
+    //Creation du tetraedre:
+    for(k1=k; k1>0; k--){
+        if(k1 == k){                //Si le niveau est la base
+        //Faire un back track sans condition impossible
+        
+        }else{                      //le niveau est fait en fonction de la base
+        
+        }
     
+    }
     
     
     
