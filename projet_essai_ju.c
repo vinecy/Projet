@@ -33,7 +33,7 @@
 /**
 * @author DENIS Justine <justine.denis@etu.univ-amu.fr>
 *
-* @version 0.0.1 / 16-09-2015
+* @version 0.0.1 / 14-12-2015
 * @toto NA
 * @bug NA 
 */
