@@ -1,5 +1,5 @@
 int main(void)
 {
-  int i, hello;
+  int i, hello2;
   i=3;
 }
