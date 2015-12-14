@@ -11,6 +11,12 @@
 // niveau[i][j][k]
 // La base est le niveau k et le dernier niveau (1 boule) est le niveau 0
 
+
+//Condditions couleurs:
+//Rouge que sur 3 rouges
+//Bleu que sur 2 couleurs  differentes
+//Vert que sur 3 couleurs differentes
+
 int main (void){
   
 }
