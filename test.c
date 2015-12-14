@@ -1,6 +1,5 @@
 int main(void)
 {
-  int i;
+  int i, hello;
   i=3;
-  hello = 5;
 }
