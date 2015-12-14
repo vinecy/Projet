@@ -1,1 +1,62 @@
+/*
+*@author BARTHOLOMEAU Vincent <vincent.bartholomeau@etu.univ-amu.fr>
+*@version 1.0 / 14-12-2015
+*@todo NA
+*@bug marche pas
+*@file test.c
+*@brief pour tester mon code sur la creation de bases,et symetrie des bases
+*/
+#include <stdio.h>
+#define n 4
 
+int creer_niveau(void)
+{
+	int niveau[n][n][n];
+	int i,j;
+	for (i=0;i<n;i++)
+	{
+		for (j=0;j<n;j++)
+		{
+			niveau[i][j][n]=0;
+		}
+	}
+	return(niveau[n][n][n]);
+}
+
+int remplir_niveau(int niveau[n][n][n])
+{
+	int i,j,couleur;
+	for (j=0;j<n;j++)
+	{
+		for(i=0;i<n-j;i++)
+		{
+			scanf("%i",&couleur);
+			niveau[i][j][n]=couleur;
+		}
+	}
+	return(niveau[n][n][n]);
+}
+
+void afficher_niveau(int niveau[n][n][n])
+{
+	printf("\n");
+	int i,j;
+	for (i=0;i<n;i++)
+	{
+		for (j=0;j<n;j++)
+		{
+			printf("%i",niveau[i][j][n]);
+		}
+		printf("\n");
+	}
+	printf("\n");
+} 
+
+
+int main(void)
+{
+	int niveau[n][n][n];
+	niveau[n][n][n]=creer_niveau();
+	niveau[n][n][n]=remplir_niveau(niveau);
+	afficher_niveau(niveau);	
+}
