@@ -48,6 +48,18 @@
 
 #include <stdio.h>
 
+
+
+/*      Retourne la couleur à poser */
+int quelle_couleur (T[i][j][k]){
+
+}
+
+
+
+
+
+
 int main (void){
 // Donnees
     int i, j, k, k1;
