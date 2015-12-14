@@ -7,7 +7,7 @@
 
 // Ligne: i
 // colonne: j
-// Niveaux: k
+// Niveau: k
 // niveau[i][j][k]
 // La base est le niveau k et le dernier niveau (1 boule) est le niveau 0
 
