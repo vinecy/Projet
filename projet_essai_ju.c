@@ -75,11 +75,11 @@ void back_track_base (int i){            //appel 1er back_track ligne = 0
 
     }else{                          //Sinon pour chaque colonnes
         for (j=K-i; j>0; j--){
-            niveau[i][j][K] = 1;
+            niveau[i][j][K] = 1;        //SI ROUGE = 0 ==> MARCHE
             back_track_base (i+1);
-            niveau[i][j][K] = 2;
+            niveau[i][j][K] = 2;        //DONC BLEU = 1
             back_track_base (i+1);
-            niveau[i][j][K] = 3;
+            niveau[i][j][K] = 3;        //ET VERT = 2
 
         }
         
