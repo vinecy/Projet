@@ -156,6 +156,62 @@ int main (void){
     
     
     
+    /* BONUS:
+     BACK TRACK des DAMES qui marche SANS CONDITIONS: (la condition c'est l'appel de mla fonction possible)
+
+
+#define N 4
+
+int TAB[N][N];
+int compt = 0;
+
+
+
+void aff_sol (void){
+int i, j;
+    for(i=0; i<N; i++) {
+        for(j=0; j<N; j++){
+            printf("%i ",TAB[i][j]);
+        }
+        printf("\n");
+      } 
+      printf("\n");
+}
+
+
+int possible (int l, int c){
+    int d;   
+    int ok = 1;
+    for(d=1; d<=l && ok; d++){              //Tant que c'est ok
+        ok = !TAB[l-d][c] 
+        && ((c-d) < 0 || !TAB[l-d][c-d]) 
+        && ((c+d) >= N || !TAB[l-d][c+d]);        
+    }
+     return ok;
+}
+
+
+void back_track (int l){            //l = lignes
+    int  c;                //n = nb lignes (taille echiquier)                    
+    if(l == N){  //imprimer solutions (toutes)                     
+      aff_sol();
+      compt++ ;
+    }else{                    //c = colonnes
+        for(c=0; c<N; c++){
+            //if(possible(l,c)){      //POUR ENLEVER LES CONDITIONS--> enleve la fonction
+                TAB[l][c] = 1;
+                back_track(l+1);
+                TAB[l][c] = 0;
+            //}
+        }
+    }
+    
+}
+
+
+*/
+    
+    
     
     
     
