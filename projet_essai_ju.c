@@ -47,7 +47,7 @@
 
 
 #include <stdio.h>
-
+#define K 4
 
 
 /*      Retourne la couleur à poser */
@@ -55,8 +55,36 @@ int quelle_couleur (T[i][j][k]){
 
 }
 
+// ICI JE ME SUIS INSPIRER DES DAMES MAIS ERREUR SEGMENTATION//
+//C'EST LE BACK TRACK SANS CONDITIONS//
+/* Fonction base back_track*/
+void back_track_base (int i){            //appel 1er back_track ligne = 0
+    int j;
+    int niveau [i][j][K];
+    
+    if (i == K){                        //Si la ligne = nb lignes
+        printf("\n Niveaux %i:\n",K);   //Afficher les solutions
+       for (i=0; i<K; i++) {
+        printf("\n");
+           for(j=K-i; j>0; j--) {
+            printf("%i ",niveau[i][j][K]);
+            }
+        }
+        printf("\n");
 
-
+    }else{                          //Sinon pour chaque colonnes
+        for (j=K-i; j>0; j--){
+            niveau[i][j][K] = 1;
+            back_track_base (i+1);
+            niveau[i][j][K] = 2;
+           // back_track_base (i+1);
+             //niveau[i][j][K] = 3;
+            //back_track_base (i+1);
+        }
+        
+    }
+    
+}
 
 
 
@@ -83,7 +111,7 @@ int main (void){
     
     
     
-    //Affichage des niveaux:
+    //Affichage des niveaux (en forme de tableau n*n):
     for(k1=0; k1<k; k1++){
         printf("\n Niveaux %i:\n",k1);
        for (i=0; i<k; i++) {
@@ -94,7 +122,19 @@ int main (void){
         }
         printf("\n");
     }
-
+    
+    
+    //Affichage des niveaux en triangle en fonction des niveau:
+    for(k1=0; k1<K; k1++){
+        printf("\n Niveaux %i:\n",k1);
+       for (i=k1; i<K; i++) {
+        printf("\n");
+           for(j=K-i; j>0; j--) {
+            printf("%i ",niveau[i][j][k1]);
+            }
+        }
+        printf("\n");
+    }
     
         
     //Creation du tetraedre:
@@ -107,6 +147,10 @@ int main (void){
         }
     
     }
+    
+    
+    //Appel back track pour la base:
+    back_track_base(0);
     
     
     
