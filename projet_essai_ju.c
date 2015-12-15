@@ -55,16 +55,17 @@ int quelle_couleur (T[i][j][k]){
 
 }
 
-// ICI JE ME SUIS INSPIRER DES DAMES MAIS ERREUR SEGMENTATION//
-//C'EST LE BACK TRACK SANS CONDITIONS//
+
+//C'EST LE BACK TRACK SANS CONDITIONS
+//PB: affiche des zeros alors qu'on a pas de zero!! (peut-etre mettre rouge = 0 ==> solutions?)
+/* Fonction base back_track*/
+int niveau [K][K][K];
+
 /* Fonction base back_track*/
 void back_track_base (int i){            //appel 1er back_track ligne = 0
     int j;
-    int niveau [i][j][K];
-    
     if (i == K){                        //Si la ligne = nb lignes
-        printf("\n Niveaux %i:\n",K);   //Afficher les solutions
-       for (i=0; i<K; i++) {
+       for (i=0; i<K; i++) {              //Afficher les solutions
         printf("\n");
            for(j=K-i; j>0; j--) {
             printf("%i ",niveau[i][j][K]);
@@ -77,14 +78,17 @@ void back_track_base (int i){            //appel 1er back_track ligne = 0
             niveau[i][j][K] = 1;
             back_track_base (i+1);
             niveau[i][j][K] = 2;
-           // back_track_base (i+1);
-             //niveau[i][j][K] = 3;
-            //back_track_base (i+1);
+            back_track_base (i+1);
+            niveau[i][j][K] = 3;
+
         }
         
     }
     
 }
+
+
+
 
 
 
