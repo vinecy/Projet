@@ -89,6 +89,76 @@ void back_track_base (int i){            //appel 1er back_track ligne = 0
 
 
 
+/* fonCTION BACK_TRACK AVEC LES NIVEAUX MARCHE PAS:*/
+void back_track_base (int i){            //appel 1er back_track ligne = 0
+    int j, k1;
+    if (i == K){                        //Si la ligne = nb lignes
+       /*for (i=0; i<K; i++) {              //Afficher les solutions
+        printf("\n");
+           for(j=K-i; j>0; j--) {
+            printf("%i ",niveau[i][j][K]);
+            }
+        }
+        printf("\n");*/
+        
+        // Choix des couleurs en fonction de la base pour les niveaux
+        for(k1=K-1; k1>0; k1--){
+            for (i=k1; i<K; i++) {
+                for(j=K-i; j>0; j--) {
+                    
+                    //Si les 3 boules identiques-->rouge
+                    if((niveau[i][j][k1-1] == niveau[i][j+1][k1-1]) 
+                    && (niveau[i][j+1][k1-1] ==  niveau[i+1][j][k1-1])){
+                        niveau[i][j][k1] = rouge;
+                    
+                    //Si les 3 boules differentes -->vert    
+                    }else if((niveau[i][j][k1-1] != niveau[i][j+1][k1-1]) 
+                    && (niveau[i][j+1][k1-1] !=  niveau[i+1][j][k1-1])){
+                        niveau[i][j][k1] = vert;
+                    
+                    //Si 2 boules identiques-->bleu    
+                    }else{
+                        niveau[i][j][k1] = bleu;
+                    }
+                }
+            }
+        }
+        
+        
+        //PROBLEME D'AFFICHAGE!! PAREIL POUR LA BOUCLE DES COULEURS!
+        // IL FAUT CHANGER LES BOUCLES DE I ET J
+       //Affichage de tous les niveaux de tous les tetraedres 
+       /*for(k1=K; k1>0; k1--){
+            printf("\n Niveaux %i:\n",k1);
+            for (i=K; i>k1; i--) {
+                
+                for(j=K-i; j>0; j--) {
+                    printf("%i ",niveau[i][j][k1]);
+                }
+                printf("\n");
+            }
+             printf("\n");
+        }*/
+
+    }else{                          //Sinon pour chaque colonnes
+        for (j=K-i; j>0; j--){
+            niveau[i][j][K] = 0;        //Rouge
+            back_track_base (i+1);
+            niveau[i][j][K] = 1;        //Bleu
+            back_track_base (i+1);
+            niveau[i][j][K] = 2;        //Vert
+             back_track_base (i+1);
+
+        }
+        
+    }
+    
+}
+
+
+
+
+
 
 
 
