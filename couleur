@@ -1,0 +1,51 @@
+/*
+*@author BARTHOLOMEAU Vincent <vincent.bartholomeau@etu.univ-amu.fr>
+*@version 1.0 / 16-12-2015
+*@todo NA
+*@bug NA
+*@file couleur.c
+*@brief pour afficher du texte en couleur
+*/
+#ifndef COULEURS		//Aucune idee
+#define COULEURS		
+
+#include <stdio.h>
+
+#define clrscr() printf("\033[H\033[2J")	//clrscr(); effacera l'écran
+
+#endif
+
+#define couleur(param) printf("\033[%sm",param)
+										// ajout du parametre couleur a printf
+										
+										
+										
+/*
+30
+Noir
+31
+Rouge
+32
+Vert
+33
+Jaune
+34
+Bleu
+35
+Magenta
+36
+Cyan
+37
+Blanc
+*/
+int main(void)
+{
+	couleur("34");
+	printf("bleu!\n");
+	couleur("31");
+	printf("rouge!\n");
+	couleur("32");
+	printf("vert!\n");
+	couleur("0");
+	return(0);
+}
