@@ -1,23 +1,14 @@
 /*
 *@author BARTHOLOMEAU Vincent <vincent.bartholomeau@etu.univ-amu.fr>
-*@version 1.0 / 14-12-2015
+*@version 1.0 / 4-1-2016
 *@todo NA
-*@bug marche toujours pas
+*@bug NA
 *@file test.c
 *@brief pour tester mon code sur la creation de bases,et symetrie des bases
 */
 #include <stdio.h>
 #define n 4
-#ifndef COULEURS
-#define COULEURS
 
-#include <stdio.h>
-
-#define clrscr() printf("\033[H\033[2J")
-
-#endif
-
-#define couleur(param) printf("\033[%sm",param)
 
 	int niveau[n][n][n];
 int creer_niveau(void)
@@ -31,9 +22,9 @@ int creer_niveau(void)
 			niveau[i][j][n]=0;
 		}
 	}
-	return(niveau[n][n][n]);
+	return(niveau[i][j][n]);
 }
-
+/*
 int remplir_niveau(int niveau[n][n][n])
 {
 	int compteur=0;
@@ -67,14 +58,30 @@ void afficher_niveau(int niveau[n][n][n])
 } 
 
 
-
+*/
 int main(void)
 {
-couleur("34");
-printf("bleu!\n");
-couleur("31");
-printf("rouge!\n");
-couleur("32");
-printf("vert!\n");
-couleur("0");
+	int i,j,couleur;
+	niveau[n][n][n]=creer_niveau();
+	///////////////////////////////////
+	for (j=0;j<n;j++)
+	{
+		for(i=0;i<n-j;i++)
+		{
+			scanf("%i",&couleur);				/////////remplissage a la main
+			niveau[j][i][n]=couleur;
+		}
+	}
+	///////////////////////////////////////
+	for(i=0;i<n;i++)
+	{
+		printf("\n");
+		for(j=0;j<n;j++)
+		{
+			printf("%i",niveau[i][j][n]);		////////affichage
+		}
+	}
+	printf("\n");
+	printf("\n");
+	///////////////////////////////////
 }
