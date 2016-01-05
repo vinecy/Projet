@@ -4,7 +4,7 @@
 *@todo NA
 *@bug NA
 *@file test.c
-*@brief pour tester mon code sur la creation de bases,et symetrie des bases
+*@brief creer une base 4x4 et applique une symetrie axiale et de rotation (antihoraire)
 */
 #include <stdio.h>
 #define n 4
