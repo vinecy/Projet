@@ -78,10 +78,46 @@ int main(void)
 		printf("\n");
 		for(j=0;j<n;j++)
 		{
-			printf("%i",niveau[i][j][n]);		////////affichage
+			printf("%i||",niveau[i][j][n]);		////////affichage1
 		}
 	}
 	printf("\n");
 	printf("\n");
+	///////////////////////////////////////
+	int temp;
+	for(i=0;i<n;i++)
+	{
+
+		for(j=0;j<(n-i)/2;j++)
+		{									////////////Symetrie miroir
+			temp=niveau[i][n-1-j-i][n];
+			niveau[i][n-1-j-i][n]=niveau[i][j][n];
+			niveau[i][j][n]=temp;
+		}
+	}
+	///////////////////////////////////////
+	for(i=0;i<n;i++)
+	{
+		printf("\n");
+		for(j=0;j<n;j++)
+		{
+			printf("%i||",niveau[n-1-i-j][i][n]);		
+		}
+	}
+	printf("\n");
+	printf("\n");
+	///////////////////////////////////////
+	
+	for(i=0;i<n;i++)
+	{
+		printf("\n");
+		for(j=0;j<n;j++)
+		{
+			printf("%i||",niveau[i][j][n]);		////////affichage2
+		}
+	}
+	printf("\n");
+	printf("\n");
+	
 	///////////////////////////////////
 }
