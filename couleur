@@ -6,7 +6,7 @@
 *@file couleur.c
 *@brief pour afficher du texte en couleur
 */
-#ifndef COULEURS		//Aucune idee
+#ifndef COULEURS		//si COULEUR EST PAS DEF FAIT TOUT JUSQUA ENDIF
 #define COULEURS		
 
 #include <stdio.h>
