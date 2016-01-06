@@ -15,7 +15,7 @@
 
 #endif
 
-#define couleur(param) printf("\033[%sm",param)
+#define couleur(param) printf("\033[%sm",param) //seule cette ligne est requise
 										// ajout du parametre couleur a printf
 										
 										
