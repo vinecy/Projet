@@ -1,0 +1,33 @@
+int niveau[n][n][n];
+int creer_niveau(void)
+{
+
+	int i,j;
+	for (i=0;i<n;i++)
+	{
+		for (j=0;j<n;j++)
+		{
+			niveau[i][j][n]=0;
+		}
+	}
+	return(niveau[i][j][n]);
+}
+
+
+
+
+
+
+
+
+int i,j,couleur;
+niveau[n][n][n]=creer_niveau();
+printf("entrez 10 nombres\n");
+	for (i=0;i<n;i++)
+	{
+		for(j=0;j<n-i;j++)
+		{
+			scanf("%i",&couleur);				/////////remplissage a la main
+			niveau[i][j][n]=couleur;
+		}
+	}
