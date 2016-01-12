@@ -1,0 +1,41 @@
+void back_track_base (int i){            //appel 1er back_track ligne = 0
+    int j, l, m;
+   
+    if (i == K){                        //Si la ligne = nb lignes
+       /*for (l=0; l<K; l++) {              //Afficher les solutions
+        printf("\n");
+           for(m=K-l; m>0; m--) {
+            printf("%i ",niveau[l][m][K]);
+            }
+        }
+        printf("\n");*/
+        for (l=0; l<K+2; l++) {
+        printf("\n");
+           for(m=0; m<K+2; m++) {
+            printf("%i ",niveau[l][m][K]);
+            }
+        }
+        printf("\n");
+
+    }else{                          //Sinon pour chaque colonnes
+        //for (j=0; j<i+1; j++){
+        for(j=K-i-1; j>=0; j--){
+               // assert(j>K);
+               if (j>K){ printf("ERRRREUUURR: j=%i i=%i\n",j,i);}
+                niveau[i][j][K] = 0;        //SI ROUGE = 0 ==> MARCHE
+                printf("\nrouge: i=%i j=%i ",i,j);
+                back_track_base (i+1);
+                niveau[i][j][K] = 1;        //DONC BLEU = 1
+                printf("bleu: i=%i j=%i \n",i,j);
+                back_track_base (i+1);
+                niveau[i][j][K] = 2;        //ET VERT = 2
+                printf("vert: i=%i j=%i \n",i,j);
+                back_track_base (i+1);
+                printf("fin: i=%i j=%i \n",i,j);
+                
+                
+
+            
+        }    
+    }
+}
