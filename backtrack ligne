@@ -1,0 +1,34 @@
+#include<stdio.h>
+
+#define K 2
+
+int niveau[K];
+void back_track_base (int i){
+    int j, l, m;
+    if (i == K+1)
+    	{
+        for (l=0; l<K+1; l++) 
+        {
+            printf("%i ",niveau[l]);
+        }
+        printf("\n");
+
+    }
+    else
+    {
+       // for(j=0; j<K+1; j++)
+       // {
+                niveau[i] = 0;       
+				back_track_base (i+1);
+                niveau[i] = 1;        
+				back_track_base (i+1);
+                niveau[i] = 2;                     
+				back_track_base (i+1);
+        //}    
+    }
+}
+
+int main(void)
+{
+	back_track_base(0);
+}
