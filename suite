@@ -1,0 +1,21 @@
+#include<stdio.h>
+int suite(int n)
+{
+	int a=1;
+	int c,b,temp;
+	for (c=1;c<=n;c++)
+	{
+		temp=b;
+		b=b+c;
+		a=temp;
+	}	
+	return(b);
+}
+
+int main(void)
+{
+	int K,i;
+	scanf("%i",&K);
+	i=suite(K);
+	printf("%i\n",i);
+}
