@@ -26,7 +26,7 @@
 #include <stdio.h>
 #include <assert.h>
 
-#define K 2                    //K taille du tetradre
+#define K 2                     //K taille du tetradre
 #define rouge 0
 #define bleu 1
 #define vert 2
@@ -50,7 +50,6 @@ void back_track_base (int i, int fin_boucle){
     nb_rouge=0;
     nb_bleu=0;
     nb_vert=0;
-    
 
        
 	 
@@ -65,6 +64,8 @@ void back_track_base (int i, int fin_boucle){
     	        valeur = valeur+1;
     	    }
     	}
+    	
+    	
     	
     	//comptage des boules de la base
     	for (l=0; l<=K-1; l++) 
@@ -83,13 +84,16 @@ void back_track_base (int i, int fin_boucle){
 				}
        	 	}
    		 }
-
+    	
+    	
+    	
+    	
     	//Calcul des niveaux inferieurs:
     	 for(k1=K-2; k1>=0; k1--)                   //niveaux
         {
             for (l=k1; l>=0; l--)                  //lignes
             {                  
-                for(c=0; c<=l; c++)                //colonnes  
+                for(c=0; c<=k1-l; c++)                //colonnes  
                 {
                     //Si les 3 boules identiques-->rouge
                     if((tetra[l][c][k1+1] == tetra[l][c+1][k1+1]) 
@@ -105,7 +109,6 @@ void back_track_base (int i, int fin_boucle){
                     {
                         tetra[l][c][k1] = vert;
                         nb_vert+=1;
-                        
                     
                     //Si 2 boules identiques-->bleu    
                     }else{
@@ -128,12 +131,7 @@ void back_track_base (int i, int fin_boucle){
                 }
             }
             printf("\n");
-            
         }
-        printf("\n");
-        printf("boules rouges=%i\n",nb_rouge);
-        printf("boules bleues=%i\n",nb_bleu);
-        printf("boules vertes=%i\n",nb_vert);
        
         compt ++;
 
@@ -145,4 +143,35 @@ void back_track_base (int i, int fin_boucle){
                 ligne[i] = 2;                     
 				back_track_base (i+1, fin_boucle);
     }
+} 
+ 
+
+
+
+
+
+
+
+
+
+
+
+
+ 
+ 
+ 
+ /*Main*/
+ int main (void){
+    int fin_boucle, h;
+    
+    
+    //Calcul de la fin de la boucle
+	    for (h=1;h<=K;h++)
+	    {
+		    fin_boucle = fin_boucle+h;
+	    }	
+
+
+   back_track_base(0,fin_boucle);     //appel de la fonction backtrack
+    printf("Il ya %i solutions \n",compt);
 } 
