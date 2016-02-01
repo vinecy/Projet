@@ -1,0 +1,145 @@
+/** 
+* Polytech Marseille
+* Case 925 -163, avenue de Luminy
+* 13288 Marseille CEDEX 9
+*
+* Ce fichier est l'oeuvre d'eleves de Polytech Marseille. Il ne peut être 
+* reproduit, utilise ou modifie sans l'avis express de ses auteurs.
+*/
+
+/**
+* @author DENIS Justine <justine.denis@etu.univ-amu.fr>
+*
+* @version 0.0.1 / 1-02-2016
+* @toto NA
+* @bug NA 
+*/
+
+/**
+* @file essai_1.c
+* @brief
+*
+*  Essai sur le back track pour la base
+**/ 
+
+
+#include <stdio.h>
+#include <assert.h>
+
+#define K 3                     //K taille du tetradre
+#define rouge 0
+#define bleu 1
+#define vert 2
+ 
+ 
+ 
+/* Declaration des variables globales*/
+int compt = 0;              //Compteur
+int ligne[K];              //Ligne de back track
+
+
+ 
+ 
+ 
+/*Fonction back_track de base */
+void back_track_base (int i, int fin_boucle){
+    int j, l, m, c, tetra[K][K][K], valeur, k1;
+
+       
+	 
+    if (i == fin_boucle)
+    	{  	
+    	
+    	//Fonction passage ligne en triangle
+    	valeur = 0;
+    	for(l=0; l<K; l++){     //Ligne 
+    	    for(c=0; c<K-l; c++){
+    	        tetra[l][c][K-1] = ligne[valeur];
+    	        valeur = valeur+1;
+    	    }
+    	}
+    	
+    	//Calcul des niveaux inferieurs:
+    	 for(k1=K-2; k1>=0; k1--)                   //niveaux
+        {
+            for (l=k1; l>=0; l--)                  //lignes
+            {                  
+                for(c=0; c<=l; c++)                //colonnes  
+                {
+                    //Si les 3 boules identiques-->rouge
+                    if((tetra[l][c][k1+1] == tetra[l][c+1][k1+1]) 
+                    && (tetra[l][c+1][k1+1] ==  tetra[l+1][c][k1+1]))
+                    {
+                        tetra[l][c][k1] = rouge;
+                    
+                    //Si les 3 boules differentes -->vert    
+                    }else if((tetra[l][c][k1+1] != tetra[l][c+1][k1+1]) 
+                    && (tetra[l][c+1][k1+1] !=  tetra[l+1][c][k1+1])
+                    && (tetra[l][c][k1+1] != tetra[l+1][c][k1+1]))
+                    {
+                        tetra[l][c][k1] = vert;
+                    
+                    //Si 2 boules identiques-->bleu    
+                    }else{
+                        tetra[l][c][k1] = bleu;
+                    }
+                }
+            }
+        }
+        
+    	
+    	
+    	//Afficher les solutions
+    	printf("\nTetra %i",compt);
+    	for(k1=K-1; k1>=0; k1--){
+        	for (l=0; l<=k1; l++) {              
+        	printf("\n");            
+               for(c=0; c<=k1-l; c++) {
+                    printf("%i ",tetra[l][c][k1]);
+                }
+            }
+            printf("\n");
+        }
+       
+        compt ++;
+
+    }else{
+                ligne[i] = 0;       
+				back_track_base (i+1, fin_boucle);
+                ligne[i] = 1;        
+				back_track_base (i+1, fin_boucle);
+                ligne[i] = 2;                     
+				back_track_base (i+1, fin_boucle);
+    }
+} 
+ 
+
+
+
+
+
+
+
+
+
+
+
+
+ 
+ 
+ 
+ /*Main*/
+ int main (void){
+    int fin_boucle, h;
+    
+    
+    //Calcul de la fin de la boucle
+	    for (h=1;h<=K;h++)
+	    {
+		    fin_boucle = fin_boucle+h;
+	    }	
+
+
+   back_track_base(0,fin_boucle);     //appel de la fonction backtrack
+    printf("Il ya %i solutions \n",compt);
+} 
