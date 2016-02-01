@@ -1,0 +1,72 @@
+#include <stdio.h>
+#include <assert.h>
+
+#define K 5                   //K taille du tetradre
+#define rouge 0
+#define bleu 1
+#define vert 2
+ 
+
+ 
+/* Declaration des variables globales*/
+int compt = 0;              //Compteur
+int niveau[K];              //Ligne de back track
+ 
+int suite(int n)
+{
+	int a=1;
+	int c,b,temp;
+	for (c=1;c<=n;c++)
+	{
+		temp=b;
+		b=b+c;
+		a=temp;
+	}	
+	return(b);
+}
+
+ 
+/*Fonction back_track de base */
+void back_track_base (int i,int a){
+    int j,l,c,triangle[K][K][K],valeur;
+
+    if (i == a)
+    	{  	
+    	
+    	printf("Solution 1ligne\n");
+    	for (l=0; l<a; l++) 
+        {
+            printf("%i ",niveau[l]);
+        }
+        printf("\n");
+    	
+    	//Fonction passage ligne en triangle
+    	valeur = 0;
+    	for(l=0; l<K; l++){     //Ligne 
+    	    for(c=0; c<K-l; c++){
+    	        triangle[l][c][K-1] = niveau[valeur];
+    	        valeur = valeur+1;
+    	    }
+    	}
+    	
+    	//Afficher les solutions
+    	for (l=0; l<K; l++) {              
+    	printf("\n");            
+           for(c=0; c<K-l; c++) {
+                printf("%i ",triangle[l][c][K-1]);
+            }
+        }
+        printf("\n");
+
+        compt ++;
+
+    }else{
+                niveau[i] = 0;       
+				back_track_base (i+1,a);
+                niveau[i] = 1;        
+				back_track_base (i+1,a);
+                niveau[i] = 2;                     
+				back_track_base (i+1,a);
+    }
+} 
+ 
