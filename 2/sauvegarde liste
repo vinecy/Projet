@@ -1,0 +1,71 @@
+#include<stdio.h>
+#include <stdlib.h>  
+#define K 2
+typedef struct maillon{
+    int tetra[K][K][K];                  
+    struct maillon *suivant;       
+}maillon;
+
+typedef maillon *t_ptr_liste;
+
+t_ptr_liste save(int tetra[K][K][K])
+{
+	int tab[K][K][K];
+	int i,j,k;
+		t_ptr_liste liste, tmp;	
+        tmp = (maillon*)malloc(sizeof(maillon));
+        
+        for(i=0;i<K;i++)
+        {
+        	for(j=0;j<K;j++)
+        	{
+        		for(k=0;k<K;k++)
+        		{
+ 
+        			tmp->tetra[i][j][k]=tetra[i][j][k];
+        		}
+        	}
+        }
+                               
+        tmp->suivant = liste;                  
+        liste = tmp;
+
+        printf("ICI CEST LA FONCTION\n");
+        for(i=0;i<K;i++)
+        {
+        	for(j=0;j<K;j++)
+        	{
+        		for(k=0;k<K;k++)
+        		{
+        			printf("liste->tetra[%i][%i][%i]=%i\n",i,j,k,liste->tetra[i][j][k]);
+        		}
+        	}
+        }          
+	return(liste);
+}
+int main (void)
+{
+	t_ptr_liste liste;
+		int i,j,k;
+	int tetra[K][K][K],tab[K][K][K];
+	tetra[0][0][0]=1;
+	tetra[0][1][0]=5;
+	tetra[1][0][0]=3;
+	tetra[1][1][0]=4;
+	tetra[0][0][1]=2;
+	tetra[0][1][1]=7;
+	tetra[1][0][1]=6;
+	tetra[1][1][1]=8;
+	liste=save(tetra);
+	printf("ICI CEST LE MAIN\n");
+	for(i=0;i<K;i++)
+        {
+        	for(j=0;j<K;j++)
+        	{
+        		for(k=0;k<K;k++)
+        		{
+        			printf("liste->tetra[%i][%i][%i]=%i\n",i,j,k,liste->tetra[i][j][k]);
+        		}
+        	}
+        }           
+}
