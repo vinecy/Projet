@@ -62,7 +62,7 @@ int symetrie(liste liste_tetra)
             printf("\n");
         }
 
-///////////////////////////////1ere sym miroir//////////////////////////////////
+
 		for(i=0;i<K;i++)
 		{
 			for(j=0;j<K-i;j++)
@@ -75,7 +75,7 @@ int symetrie(liste liste_tetra)
 		}
 		if (result1==0){printf("1 miroir 0 rot\n");}
 
-///////////////////////////////1ere sym axiale//////////////////////////////////
+
 	for(i=0;i<K;i++)
 		{
 			for(j=0;j<K-i;j++)
@@ -87,7 +87,7 @@ int symetrie(liste liste_tetra)
 			}
 		}
 		if (result2==0){printf("0 miroir 1 rot\n");}
-///////////////////////////////2ere sym miroir//////////////////////////////////
+
 		for(i=0;i<K;i++)
 		{
 			for(j=0;j<K-i;j++)
@@ -99,7 +99,7 @@ int symetrie(liste liste_tetra)
 			}
 		}
 		if (result3==0){printf("0 miroir 2 rot\n");}
-///////////////////////////////2ere sym axiale//////////////////////////////////
+
 	for(i=0;i<K;i++)
 		{
 			for(j=0;j<K-i;j++)
@@ -111,7 +111,7 @@ int symetrie(liste liste_tetra)
 			}
 		}
 		if (result4==0){printf("1 miroir 1 rot\n");}
-///////////////////////////////3ere sym miroir//////////////////////////////////
+
 		for(i=0;i<K;i++)
 		{
 			for(j=0;j<K-i;j++)
