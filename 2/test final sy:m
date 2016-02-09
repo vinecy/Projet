@@ -1,0 +1,247 @@
+#include <stdio.h>
+#include <stdlib.h>
+#define K 4
+
+typedef struct maillon_tetra{     
+    int tetra[K][K][K];                    
+    struct maillon_tetra *suivant;         //Creation pointeur sur prochain maillon
+}maillon_tetra;
+
+typedef maillon_tetra *liste;
+
+
+int symetrie(liste liste_tetra)
+{
+	int result;
+	int result1=0;
+	int result2=0;
+	int result3=0;
+	int result4=0;
+	int result5=0;
+	int i,j,k1,l,c;
+	int tetra[K][K][K],copie[K][K][K];
+	for (k1=0; k1<K; k1++){
+    		for (l=0; l<=k1; l++) {                      
+        		for(c=0; c<=k1-l; c++) {
+        	    	tetra[l][c][k1] = liste_tetra->tetra[l][c][k1];
+        	    }
+        	}
+    	} 
+    liste_tetra = liste_tetra->suivant; 
+	while (liste_tetra != NULL)
+	{
+		for (k1=0; k1<K; k1++){
+    		for (l=0; l<=k1; l++) {                      
+        		for(c=0; c<=k1-l; c++) {
+        	    	copie[l][c][k1] = liste_tetra->tetra[l][c][k1];
+        	    }
+        	}
+    	}  
+    	
+    	
+   printf("TETRA\n"); 	
+    	 for(k1=K-1; k1>=0; k1--){
+        	for (l=0; l<=k1; l++) {              
+        	printf("\n");            
+               for(c=0; c<=k1-l; c++) {
+                    printf("%i ",tetra[l][c][k1]);
+                }
+            }
+            printf("\n");
+        }
+
+
+   printf("COPIE\n"); 	
+ for(k1=K-1; k1>=0; k1--){
+        	for (l=0; l<=k1; l++) {              
+        	printf("\n");            
+               for(c=0; c<=k1-l; c++) {
+                    printf("%i ",copie[l][c][k1]);
+                }
+            }
+            printf("\n");
+        }
+
+///////////////////////////////1ere sym miroir//////////////////////////////////
+		for(i=0;i<K;i++)
+		{
+			for(j=0;j<K-i;j++)
+			{
+				if(copie[i][K-1-i-j][K-1]!=tetra[i][j][K-1])
+				{
+					result1=1;	
+				}
+			}
+		}
+		if (result1==0){printf("1 miroir 0 rot\n");}
+
+///////////////////////////////1ere sym axiale//////////////////////////////////
+	for(i=0;i<K;i++)
+		{
+			for(j=0;j<K-i;j++)
+			{
+				if(copie[K-1-i-j][i][K-1]!=tetra[i][j][K-1])
+				{
+					result2=1;
+				}
+			}
+		}
+		if (result2==0){printf("0 miroir 1 rot\n");}
+///////////////////////////////2ere sym miroir//////////////////////////////////
+		for(i=0;i<K;i++)
+		{
+			for(j=0;j<K-i;j++)
+			{
+				if(copie[j][K-1-i-j][K-1]!=tetra[i][j][K-1])
+				{
+					result3=1;
+				}
+			}
+		}
+		if (result3==0){printf("0 miroir 2 rot\n");}
+///////////////////////////////2ere sym axiale//////////////////////////////////
+	for(i=0;i<K;i++)
+		{
+			for(j=0;j<K-i;j++)
+			{
+				if(copie[K-1-i-j][j][K-1]!=tetra[i][j][K-1])
+				{
+					result4=1;
+				}
+			}
+		}
+		if (result4==0){printf("1 miroir 1 rot\n");}
+///////////////////////////////3ere sym miroir//////////////////////////////////
+		for(i=0;i<K;i++)
+		{
+			for(j=0;j<K-i;j++)
+			{
+				if(copie[j][i][K-1]!=tetra[i][j][K-1])
+				{
+					result5=1;
+				}
+			}
+		}
+		if (result5==0){printf("1 miroir 2 rot\n");}
+		liste_tetra = liste_tetra->suivant;
+	}
+	if((result1==1)&&(result2==1)&&(result3==1)&&(result4==1)&&(result5==1))
+	{
+		printf("result1=%i\n",result1);
+		printf("result2=%i\n",result2);
+		printf("result3=%i\n",result3);
+		printf("result4=%i\n",result4);
+		printf("result5=%i\n",result5);
+		result=0;
+	}else{
+	printf("result1=%i\n",result1);
+		printf("result2=%i\n",result2);
+		printf("result3=%i\n",result3);
+		printf("result4=%i\n",result4);
+		printf("result5=%i\n",result5);
+		result=1;
+	}
+	return(result);
+}
+int main(void)
+{
+	int tetra1[K][K][K],tetra2[K][K][K];
+	liste liste_tetra=NULL;
+	int k1,l,c;
+	maillon_tetra* ptr;
+	
+	tetra2[0][0][3]=1;
+	tetra2[0][1][3]=2;
+	tetra2[0][2][3]=3;
+	tetra2[0][3][3]=4;
+	tetra2[1][0][3]=5;
+	tetra2[1][1][3]=6;
+	tetra2[1][2][3]=7;
+	tetra2[2][0][3]=8;
+	tetra2[2][1][3]=9;
+	tetra2[3][0][3]=10;
+	
+	tetra1[0][0][2]=0;
+	tetra1[0][1][2]=0;
+	tetra1[0][2][2]=0;
+	tetra1[1][0][2]=0;
+	tetra1[1][1][2]=0;
+	tetra1[2][0][2]=0;	
+	tetra1[0][0][1]=0;
+	tetra1[0][1][1]=0;
+	tetra1[1][0][1]=0;
+	tetra1[0][0][0]=0;
+	/* Changer ces valeurs*/
+	tetra1[0][0][3]=1;
+	tetra1[0][1][3]=5;
+	tetra1[0][2][3]=8;
+	tetra1[0][3][3]=10;
+	
+	tetra1[1][0][3]=2;
+	tetra1[1][1][3]=6;
+	tetra1[1][2][3]=9;
+	
+	tetra1[2][0][3]=3;
+	tetra1[2][1][3]=7;
+	
+	tetra1[3][0][3]=4;
+	/*////////////////////*/
+	
+	tetra2[0][0][2]=0;
+	tetra2[0][1][2]=0;
+	tetra2[0][2][2]=0;
+	tetra2[1][0][2]=0;
+	tetra2[1][1][2]=0;
+	tetra2[2][0][2]=0;
+	tetra2[0][0][1]=0;
+	tetra2[0][1][1]=0;
+	tetra2[1][0][1]=0;
+	tetra2[0][0][0]=0;
+	ptr = (maillon_tetra*)malloc(sizeof(maillon_tetra));
+        for (k1=0; k1<K; k1++){
+            for (l=0; l<=k1; l++) {                      
+               for(c=0; c<=k1-l; c++) {
+                    ptr->tetra[l][c][k1] = tetra1[l][c][k1];
+                }
+            }
+        }                      
+    ptr->suivant = liste_tetra;
+    liste_tetra=ptr;
+        
+    ptr = (maillon_tetra*)malloc(sizeof(maillon_tetra));
+        for (k1=0; k1<K; k1++){
+            for (l=0; l<=k1; l++) {                      
+               for(c=0; c<=k1-l; c++) {
+                    ptr->tetra[l][c][k1] = tetra2[l][c][k1];
+                }
+            }
+        }                      
+    ptr->suivant = liste_tetra;
+    liste_tetra=ptr;
+    
+   
+    int a;
+    a=symetrie(liste_tetra);
+    printf("%i\n",a);
+    
+    /*
+    while(liste_tetra != NULL){
+  
+     for(k1=K-1; k1>=0; k1--){
+        	for (l=0; l<=k1; l++) {              
+        	printf("\n");            
+               for(c=0; c<=k1-l; c++) {
+                    printf("%i ",liste_tetra->tetra[l][c][k1]);
+                }
+            }
+            printf("\n");
+        }
+
+        
+        
+        liste_tetra = liste_tetra->suivant;
+        
+    }
+    */
+    return(0);
+}
