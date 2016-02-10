@@ -1,0 +1,112 @@
+/*---------------------------------------------------------------------------*/
+/*Verification des symetries*/
+int symetrie(liste liste_tetra)
+{
+	if(liste_tetra->suivant==NULL)
+	{
+		return(1);//Si il n'y a qu'un seul tableau, il n'y a rien a tester
+	}
+	
+	int result;
+	int result1=0;
+	int result2=0;
+	int result3=0;
+	int result4=0;
+	int result5=0;
+	int i,j,l,c;
+	int tetra[K][K],copie[K][K];
+	
+
+    for (l=0; l<=K; l++) //on recupere la base du denier tableau de la liste
+    {                      
+        for(c=0; c<=K-l; c++) 
+        {
+       		tetra[l][c] = liste_tetra->tetra[l][c][K-1];
+       	}
+   	}	
+    liste_tetra = liste_tetra->suivant; 
+    
+	while (liste_tetra != NULL)
+	{
+	result1=0;
+	result2=0;
+	result3=0;
+	result4=0;
+	result5=0;
+
+    for (l=0; l<=K-1; l++) // on recupere un base a comparer
+    {                      
+        for(c=0; c<=K-1-l; c++) 
+        {
+        	   copie[l][c] = liste_tetra->tetra[l][c][K-1];
+       	}
+    }
+    
+/////////////////////boucles de reperage de symetries///////////////////////////
+		for(i=0;i<K;i++)
+		{
+			for(j=0;j<K-i;j++)
+			{
+				if(copie[i][K-1-i-j]!=tetra[i][j])
+				{
+					result1=1;//1 symetrie axial
+					
+ // Si tout pour i,j copie[i][K-1-i-j]==tetra[i][j], alors on a une symetrie
+ //et result1=0, donc on retourne 0.
+ 
+				}
+			}
+		}
+		for(i=0;i<K;i++)
+		{
+			for(j=0;j<K-i;j++)
+			{
+				if(copie[K-1-i-j][i]!=tetra[i][j])
+				{
+					result2=1;//1 symetrie rotation anti-horaire
+				}
+			}
+		}
+		for(i=0;i<K;i++)
+		{
+			for(j=0;j<K-i;j++)
+			{
+				if(copie[j][K-1-i-j]!=tetra[i][j])
+				{
+					result3=1;//1 symetrie rotation horaire
+				}
+			}
+		}
+		for(i=0;i<K;i++)
+		{
+			for(j=0;j<K-i;j++)
+			{
+				if(copie[K-1-i-j][j]!=tetra[i][j])
+				{
+					result4=1;//1 symetrie rotation anti-horaire et 1 axiale
+				}
+			}
+		}
+		for(i=0;i<K;i++)
+		{
+			for(j=0;j<K-i;j++)
+			{
+				if(copie[j][i]!=tetra[i][j])
+				{
+					result5=1;//1 symetrie rotation horaire et 1 axiale
+				}
+			}
+		}
+	
+//////////////////////////////////////////////////////////////////////////////
+		liste_tetra = liste_tetra->suivant;
+		if((result1==0)||(result2==0)||(result3==0)||(result4==0)||(result5==0))
+		{
+
+			result=0; //on rejette
+			return(result);
+		}
+	}	
+	result=1;//on accepte
+	return(result);
+}
