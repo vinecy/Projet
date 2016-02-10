@@ -975,10 +975,10 @@ int main (void){
                     
                   case MAXBLEU :						//Maximum de bleue
                     compt = 0;    
-                    back_track_bleu(0,fin_boucle, max_bleu); 
+                    back_track_bleu(0,fin_boucle, max_bleu); 			//Appel backtrack	
                     affichage (liste_tetra);
                     
-                    while(liste_tetra != NULL){
+                    while(liste_tetra != NULL){					//Compteur de solution
                         compt = compt+1; 
                         liste_tetra = liste_tetra->suivant;
                      }
@@ -987,53 +987,58 @@ int main (void){
                      printf(" pour %i bleu\n",*max_bleu);
                      break ;
                   
-                  case MAXVERT : 
+                  case MAXVERT : 						//Maximum de vert
                     compt = 0;   
-                        back_track_vert(0,fin_boucle, max_vert); 
-                        affichage (liste_tetra);
-                     while(liste_tetra != NULL){
+                    back_track_vert(0,fin_boucle, max_vert); 			//appel backtrack
+                    affichage (liste_tetra);
+                    
+                    while(liste_tetra != NULL){					//Compteur de solution
                         compt = compt+1; 
                         liste_tetra = liste_tetra->suivant;
                      }
+                     
                      printf("Il y a %i solutions",compt);
-                      printf(" pour %i verts\n",*max_vert);
-                    break ;
+                     printf(" pour %i verts\n",*max_vert);
+                     break ;
 
-                  case MINMAXVERT : 
-                  compt = 0;  
-                  back_track_vert_rouge(0,fin_boucle, max_vert, min_rouge);
-                  liste_tetra = trie_minmax_vert (liste_tetra_rouge, max_vert, min_rouge); 
-                  affichage (liste_tetra);
-                     while(liste_tetra != NULL){
+                  case MINMAXVERT : 							//Maximum vert et minimum rouge
+                     	compt = 0;  
+                  	back_track_vert_rouge(0,fin_boucle, max_vert, min_rouge);
+                  	liste_tetra = trie_minmax_vert (liste_tetra_rouge, max_vert, min_rouge); 
+                  	affichage (liste_tetra);
+                  	
+                    while(liste_tetra != NULL){						//compteur solution
                         compt = compt+1; 
                         liste_tetra = liste_tetra->suivant;
-                     }
-                     printf("Il y a %i solutions",compt);
-                      printf(" pour %i rouges et %i verts\n",*min_rouge,*max_vert);
-                   
-                  break ;
-                  case MINMAXBLEU :  
-                  compt = 0;  
-                  back_track_bleu_rouge(0,fin_boucle, max_bleu, min_rouge);
-                  liste_tetra = trie_minmax_bleu (liste_tetra_rouge, max_bleu, min_rouge); 
-                  affichage (liste_tetra);
-                     while(liste_tetra != NULL){
-                       
-                        compt = compt+1; 
-                        liste_tetra = liste_tetra->suivant;
-                     }
-                     printf("Il y a %i solutions",compt);
-                     printf(" pour %i rouges et %i bleu\n",*min_rouge,*max_bleu);
-                   
-                  break ;
+                    }
+                    
+                    printf("Il y a %i solutions",compt);
+                    printf(" pour %i rouges et %i verts\n",*min_rouge,*max_vert);
+                    break ;
+                    
+                  case MINMAXBLEU :  							//Maximum bleu et minimum rouge
+                  	compt = 0;  
+                  	back_track_bleu_rouge(0,fin_boucle, max_bleu, min_rouge);	//Appel backtrack
+                  	liste_tetra = trie_minmax_bleu (liste_tetra_rouge, max_bleu, min_rouge); 
+                  	affichage (liste_tetra);
+                  	
+                	while(liste_tetra != NULL){					//compteur solution
+                                compt = compt+1; 
+                        	liste_tetra = liste_tetra->suivant;
+                        }
+                        
+                     	printf("Il y a %i solutions",compt);
+                     	printf(" pour %i rouges et %i bleu\n",*min_rouge,*max_bleu);
+                       	break ;
                   
           }
           (void)printf( "\n Souhaitez vous continuer?\n 1: Oui   0: Non\n " ) ;
           (void)scanf( "%d" , &encore ) ;
+          
      }while ( encore ) ;
-      (void)printf( "Fin du programme\nAurevoir\n" ) ;    
+     
+(void)printf( "Fin du programme\n" ) ;    
     
 
     return(0);
-
 }                 
