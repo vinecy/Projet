@@ -1,0 +1,45 @@
+#define couleur(param) printf("\033[%sm",param) //seule cette ligne est requise
+
+
+void affichage(liste liste_tetra)
+{
+ 	int c, l, k1,compteur;
+ 	compteur=0;
+ 	printf("\nAffichage des solutions\n");
+	while(liste_tetra != NULL)
+	{
+		compteur++;
+		printf("Solution n°%i",compteur); 	
+    	for(k1=K-1; k1>=0; k1--)
+    	{
+    		for (l=0; l<=k1; l++) 
+    		{              
+        		printf("\n");            
+            	for(c=0; c<=k1-l; c++) 
+            	{
+               		if (liste_tetra->tetra[l][c][k1]==0)
+               		{
+               			couleur("31");//couleur rouge
+               			printf("r ");
+               			couleur("0");//retourn a la couleur blanche
+               		}
+               		else if(liste_tetra->tetra[l][c][k1]==1)
+               		{
+               			couleur("36");//couleur cyan car bleu est trop sombre
+               			printf("b ");
+               			couleur("0");
+               		}
+               		else
+               		{
+               			couleur("32");//couleur verte
+               			printf("v ");
+               			couleur("0");
+               		}
+                }
+            }
+            printf("\n");
+        }
+        printf("\n");
+        liste_tetra = liste_tetra->suivant;
+    }
+}
