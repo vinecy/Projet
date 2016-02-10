@@ -932,23 +932,23 @@ int choisir ( void ){
 
 
 
-/*---------------------------MAIN-----------------------------------*/                 
+///////////////////////////////////MAIN///////////////////////////////////                
 int main (void){    
     int choix, fin_boucle, h, compt, ini, encore;   
-    int *min_rouge, *max_bleu, *max_vert;
-    compt = 0;                                      //compteur
+    int *min_rouge, *max_bleu, *max_vert;		//Minimum et maximum des couleurs	
+    compt = 0;                                      	//compteur
     fin_boucle = 0;
-    ini = 0;                                        //initialisation des maximum
+    ini = 0;                                        	//initialisation des maximum
                                      
     
     
     //Calcul du nombre de boules dans la base
-	 for (h=1;h<=K;h++)
-	    {  
-		    fin_boucle = fin_boucle+h;
-	    }	
+    for (h=1;h<=K;h++)
+    {  
+	fin_boucle = fin_boucle+h;
+    }	
 	    
-    min_rouge = &fin_boucle;
+    min_rouge = &fin_boucle;				//Initialisation 
     max_bleu = &ini;
     max_vert = &ini;
           
@@ -959,30 +959,33 @@ int main (void){
     do{
         choix = choisir() ;
         switch ( choix ){
-                 case MINROUGE : 
-                    compt = 0;                  
-                     back_track_rouge(0,fin_boucle, min_rouge); 
-                     affichage (liste_tetra);
-                     while(liste_tetra != NULL){
+                case MINROUGE : 						//Minimum de rouge
+                     compt = 0;                  
+                     back_track_rouge(0,fin_boucle, min_rouge); 		//Appel backtrack
+                     affichage (liste_tetra);					
+                     
+                     while(liste_tetra != NULL){				//Compteur de solution
                         compt = compt+1; 
                         liste_tetra = liste_tetra->suivant;
                      }
+                     
                      printf("Il y a %i solutions",compt);
                      printf(" pour %i rouges\n",*min_rouge);
                      break ;
                     
-                  case MAXBLEU :
+                  case MAXBLEU :						//Maximum de bleue
                     compt = 0;    
                     back_track_bleu(0,fin_boucle, max_bleu); 
                     affichage (liste_tetra);
-                     while(liste_tetra != NULL){
-                        
+                    
+                    while(liste_tetra != NULL){
                         compt = compt+1; 
                         liste_tetra = liste_tetra->suivant;
                      }
+                     
                      printf("Il y a %i solutions",compt);
                      printf(" pour %i bleu\n",*max_bleu);
-                    break ;
+                     break ;
                   
                   case MAXVERT : 
                     compt = 0;   
