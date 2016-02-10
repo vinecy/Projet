@@ -284,31 +284,31 @@ void affichage(liste liste_tetra)
         liste_tetra = liste_tetra->suivant;
     }
 } 
- 
+/////////////////////////////////////////// CASE MIN ROUGE///////////////////// 
 /*--------------------------TRIE ROUGE----------------------------------------*/ 
 /* @Brief: Copie les éléments de la liste qui ont un minimum de rouge 
 *  et enlève les symétries
+*  Parametre: liste contenant les tetraedre et un entier contenant le minimum de rouge
+*  Retourne une liste
 */
 liste trie_rouge (liste liste_tetra, int* min_rouge){
-
-    liste   copie;
+    liste  copie;								//Copie: nouvelle liste vide			
     copie = NULL;
-    if(liste_tetra == NULL){
+    if(liste_tetra == NULL)
+    {
         return(liste_tetra);
     }else{
-    while( liste_tetra != NULL){
-        if ((*min_rouge >= liste_tetra->nb_rouge) && symetrie(liste_tetra)){
-    copie = ajout_liste (liste_tetra->tetra, copie, 
-            liste_tetra->nb_rouge, liste_tetra->nb_bleu, liste_tetra->nb_vert);
-   
-        }
-     liste_tetra = liste_tetra->suivant;
+	    while( liste_tetra != NULL)
+	    {										//Si nombre rouge minimum et tetra non symetrique
+	        if ((*min_rouge >= liste_tetra->nb_rouge) && symetrie(liste_tetra))
+	        {									//Copie le maillon dans la liste
+	    		copie = ajout_liste (liste_tetra->tetra, copie, 
+	            liste_tetra->nb_rouge, liste_tetra->nb_bleu, liste_tetra->nb_vert);
+	        }
+	     liste_tetra = liste_tetra->suivant;
+	    }
+    return(copie);								//Retourne copie
     }
-
-    return(copie);
-    }
-    
-    
 }
 
 
@@ -316,6 +316,8 @@ liste trie_rouge (liste liste_tetra, int* min_rouge){
 /*--------------------------TRIE BLEU----------------------------------------*/ 
 /* @Brief: Copie les éléments de la liste qui ont un maximum de bleu 
 *  et enlève les symétries
+*  Parametre: liste contenant les tetraedre et un entier contenant le maximum de bleu
+*  Retourne une liste
 */
 liste trie_bleu (liste liste_tetra, int* max_bleu){
 
