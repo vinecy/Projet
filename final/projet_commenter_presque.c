@@ -344,29 +344,35 @@ liste trie_bleu (liste liste_tetra, int* max_bleu){
 /*--------------------------TRIE VERT----------------------------------------*/ 
 /* @Brief: Copie les éléments de la liste qui ont un maximum de vert 
 *  et enlève les symétries
+*  Parametre: liste contenant les tetraedre et un entier contenant le maximum de vert
+*  Retourne une liste
 */
 liste trie_vert (liste liste_tetra, int* max_vert){
-
     liste   copie;
     copie = NULL;
-    if(liste_tetra == NULL){
+    if(liste_tetra == NULL)
+    {
         return(liste_tetra);
     }else{
-    while( liste_tetra != NULL){
-        if ((*max_vert <= liste_tetra->nb_vert) && symetrie(liste_tetra)){
-    copie = ajout_liste (liste_tetra->tetra, copie, 
-            liste_tetra->nb_rouge, liste_tetra->nb_bleu, liste_tetra->nb_vert);
-   
-        }
-     liste_tetra = liste_tetra->suivant;
-    }
+    	while( liste_tetra != NULL)
+    	{
+	        if ((*max_vert <= liste_tetra->nb_vert) && symetrie(liste_tetra)){
+	    		copie = ajout_liste (liste_tetra->tetra, copie, 
+	            	liste_tetra->nb_rouge, liste_tetra->nb_bleu, liste_tetra->nb_vert);
+	        }
+	    	liste_tetra = liste_tetra->suivant;
+    	}
     return(copie);
     }
 }
 
 
 /*---------------- BACK TRACK MIN ROUGE -------------------------------*/
-/*@brief:
+/*@brief: Creation du tetraedre avec un backtrack pour la base et 
+* comptage des couleurs dans le tetraedre. Puis appel a la creation
+*  de la liste pour les minimum de rouges.
+*  Parametre: un entier i, un entier correspondant au nombre de boules
+*  de la base et le minimum de rouge.
 */
 void back_track_rouge (int i, int fin_boucle, int *min_rouge){
 
@@ -466,7 +472,11 @@ void back_track_rouge (int i, int fin_boucle, int *min_rouge){
 
 
 /*---------------- BACK TRACK MAX BLEU -------------------------------*/
-/*@brief:
+/*@brief: Creation du tetraedre avec un backtrack pour la base et 
+* comptage des couleurs dans le tetraedre. Puis appel a la creation
+*  de la liste pour les maximum de bleu.
+*  Parametre: un entier i, un entier correspondant au nombre de boules
+*  de la base et le maximum de bleu.
 */
 void back_track_bleu (int i, int fin_boucle, int *max_bleu){
 
@@ -539,7 +549,7 @@ void back_track_bleu (int i, int fin_boucle, int *max_bleu){
         }
         
         
-        // Calcule du minimum de rouge:
+        // Calcule du maximum de bleu:
         if (nb_bleu >= *max_bleu ){
             *max_bleu = nb_bleu;
             
@@ -567,7 +577,11 @@ void back_track_bleu (int i, int fin_boucle, int *max_bleu){
 
 
 /*---------------- BACK TRACK MAX VERT -------------------------------*/
-/*@brief:
+/*@brief: Creation du tetraedre avec un backtrack pour la base et 
+* comptage des couleurs dans le tetraedre. Puis appel a la creation
+*  de la liste pour les maximum de verts.
+*  Parametre: un entier i, un entier correspondant au nombre de boules
+*  de la base et le maximum de verts.
 */
 void back_track_vert (int i, int fin_boucle, int *max_vert){
 
@@ -640,7 +654,7 @@ void back_track_vert (int i, int fin_boucle, int *max_vert){
         }
         
         
-        // Calcule du minimum de rouge:
+        // Calcule du maximum de verts:
         if (nb_vert >= *max_vert ){
             *max_vert = nb_vert;
             
@@ -669,7 +683,11 @@ void back_track_vert (int i, int fin_boucle, int *max_vert){
 
 
 /*---------------- BACK TRACK MAX VERT MIN ROUGE -----------------------------*/
-/*@brief:
+/*@brief: Creation du tetraedre avec un backtrack pour la base et 
+* comptage des couleurs dans le tetraedre. Puis appel a la creation
+*  de la liste pour les minimum de rouges et les maximums de verts.
+*  Parametre: un entier i, un entier correspondant au nombre de boules
+*  de la base et le minimum de rouge et le maximum de vert.
 */
 void back_track_vert_rouge (int i, int fin_boucle, int *max_vert, int *min_rouge){
 
@@ -742,13 +760,13 @@ void back_track_vert_rouge (int i, int fin_boucle, int *max_vert, int *min_rouge
         }
         
         
-        // Calcule du maximum de vert:
-        if (nb_rouge <= *min_rouge ){
+        
+        if (nb_rouge <= *min_rouge ){		//Calcul du minimum de rouge	
              *min_rouge = nb_rouge;
              liste_tetra_rouge = ajout_liste (tetra,liste_tetra,nb_rouge,nb_bleu,nb_vert);
              liste_tetra_rouge = trie_rouge(liste_tetra, min_rouge);
               
-        if (nb_vert >= *max_vert ){
+        if (nb_vert >= *max_vert ){		// Calcule du maximum de vert:
               *max_vert = nb_vert;
             }  
 
@@ -772,7 +790,11 @@ void back_track_vert_rouge (int i, int fin_boucle, int *max_vert, int *min_rouge
 
 
 /*---------------- BACK TRACK MAX BLEU MIN ROUGE -----------------------------*/
-/*@brief:
+/*@brief: Creation du tetraedre avec un backtrack pour la base et 
+* comptage des couleurs dans le tetraedre. Puis appel a la creation
+*  de la liste pour les minimum de rouges et les maximums de bleu.
+*  Parametre: un entier i, un entier correspondant au nombre de boules
+*  de la base et le minimum de rouge et le maximum de bleu.
 */
 void back_track_bleu_rouge (int i, int fin_boucle, int *max_bleu, int *min_rouge){
 
@@ -845,13 +867,13 @@ void back_track_bleu_rouge (int i, int fin_boucle, int *max_bleu, int *min_rouge
         }
         
         
-        // Calcule du maximum de vert:
-        if (nb_rouge <= *min_rouge ){
+        
+        if (nb_rouge <= *min_rouge ){				// Calcule du minimum de rouge
              *min_rouge = nb_rouge;
            liste_tetra_rouge = ajout_liste(tetra,liste_tetra_rouge,nb_rouge,nb_bleu,nb_vert);
              liste_tetra_rouge = trie_rouge(liste_tetra_rouge, min_rouge);
               
-        if (nb_bleu >= *max_bleu ){
+        if (nb_bleu >= *max_bleu ){				// Calcule du maximum de vert
               *max_bleu = nb_bleu;
             }  
 
@@ -875,6 +897,12 @@ void back_track_bleu_rouge (int i, int fin_boucle, int *max_bleu, int *min_rouge
 
 
 /*-------------------- TRIE MIN MAX VERT ----------------------------*/
+/* @Brief: Copie les éléments de la liste qui ont un maximum de vert
+*  et un minimum de rouge et enlève les symétries
+*  Parametre: liste contenant les tetraedre et deux entiers contenant le maximum de vert
+*  et le minimum de rouge 
+*  Retourne une liste
+*/
 liste trie_minmax_vert (liste liste_tetra_rouge, int *max_vert, int *min_rouge){
     liste copie = NULL;
     while (liste_tetra_rouge != NULL){
@@ -892,6 +920,12 @@ liste trie_minmax_vert (liste liste_tetra_rouge, int *max_vert, int *min_rouge){
 
 
 /*---------------- Trie min max BLEU--------------------------*/
+/* @Brief: Copie les éléments de la liste qui ont un maximum de bleu
+*  et un minimum de rouge et enlève les symétries
+*  Parametre: liste contenant les tetraedre et deux entiers contenant le maximum de bleu
+*  et le minimum de rouge 
+*  Retourne une liste
+*/
 liste trie_minmax_bleu (liste liste_tetra_rouge, int *max_bleu, int *min_rouge){
 
     liste copie = NULL;
@@ -909,7 +943,9 @@ liste trie_minmax_bleu (liste liste_tetra_rouge, int *max_bleu, int *min_rouge){
 
 
 /*------------------ FONCTION POUR LE SWITCH ---------------------------*/
-
+/*@brief: Permet d'afficher les choix pour le switch et de retourner le choix
+* s'il est compris dans ceux propose.
+*/
 int choisir ( void ){
     int reponse ;
      do {(void)printf("Choix : \n%d Minimum de rouges \n%d Maximum de bleus \n" ,
@@ -932,7 +968,7 @@ int choisir ( void ){
 
 
 
-///////////////////////////////////MAIN///////////////////////////////////                
+/////////////////////////////////  MAIN  ///////////////////////////////////                
 int main (void){    
     int choix, fin_boucle, h, compt, ini, encore;   
     int *min_rouge, *max_bleu, *max_vert;		//Minimum et maximum des couleurs	
