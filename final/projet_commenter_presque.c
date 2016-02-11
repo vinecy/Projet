@@ -262,7 +262,7 @@ void affichage(liste liste_tetra)
                		{
                			couleur("31");//couleur rouge
                			printf("r ");
-               			couleur("0");//retourne a la couleur blanche
+               			couleur("0");//retour a la couleur blanche
                		}
                		else if(liste_tetra->tetra[l][c][k1]==1)
                		{
@@ -410,7 +410,7 @@ void back_track_rouge (int i, int fin_boucle, int *min_rouge){
 					nb_vert++;
 				}
        	 	}
-   		 }
+   	}
     	
     	
     	//Calcul des niveaux inferieurs:
@@ -452,7 +452,6 @@ void back_track_rouge (int i, int fin_boucle, int *min_rouge){
            liste_tetra = ajout_liste (tetra,liste_tetra,nb_rouge,nb_bleu,nb_vert);
            liste_tetra = trie_rouge (liste_tetra, min_rouge); 
         }
-            
         
         
     }else{                                      //Back track
@@ -514,7 +513,7 @@ void back_track_bleu (int i, int fin_boucle, int *max_bleu){
 					nb_vert++;
 				}
        	 	}
-   		 }
+	}
     	
     	
     	//Calcul des niveaux inferieurs:
@@ -619,7 +618,8 @@ void back_track_vert (int i, int fin_boucle, int *max_vert){
 					nb_vert++;
 				}
        	 	}
-   		 }
+    		
+    	}
     	
     	
     	//Calcul des niveaux inferieurs:
@@ -725,7 +725,7 @@ void back_track_vert_rouge (int i, int fin_boucle, int *max_vert, int *min_rouge
 					nb_vert++;
 				}
        	 	}
-   		 }
+   	}
     	
     	
     	//Calcul des niveaux inferieurs:
@@ -832,7 +832,7 @@ void back_track_bleu_rouge (int i, int fin_boucle, int *max_bleu, int *min_rouge
 					nb_vert++;
 				}
        	 	}
-   		 }
+   	 }
     	
     	
     	//Calcul des niveaux inferieurs:
@@ -981,7 +981,7 @@ int main (void){
     //Calcul du nombre de boules dans la base
     for (h=1;h<=K;h++)
     {  
-	fin_boucle = fin_boucle+h;
+	fin_boucle = fin_boucle+h;			//Suite Un+1=Un+n avec U1=1
     }	
 	    
     min_rouge = &fin_boucle;				//Initialisation 
@@ -1072,8 +1072,7 @@ int main (void){
           (void)scanf( "%d" , &encore ) ;
           
      }while ( encore ) ;
-     
-(void)printf( "Fin du programme\n" ) ;    
+     (void)printf( "Fin du programme\n" ) ;    
     
 
     return(0);
