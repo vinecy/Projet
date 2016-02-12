@@ -1137,8 +1137,14 @@ int main (void)
           
           (void)printf( "\n Souhaitez vous continuer?\n  Pour quitter: 0\n " ) ;
           (void)scanf( "%d" , &encore ) ;
+        
+          if (encore < 0 || encore >1){
+            printf("\nERREUR: Le nombre saisi n'est pas correct\n");
+            printf( "\n Souhaitez vous continuer?\n  1: OUI  0: NON\n " ) ;
+            scanf( "%d" , &encore ) ;
+          }
           
-     }while ( encore ) ;
+     }while ( encore == 1 ) ;
      
      (void)printf( "Fin du programme\n" ) ;    
     
